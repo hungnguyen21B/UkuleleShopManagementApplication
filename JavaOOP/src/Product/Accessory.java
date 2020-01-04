@@ -6,7 +6,8 @@ public class Accessory extends Instrument{
 		
 		public Accessory(String name, double price, String color, int quantity) {
 			super(name, price, color, quantity);
-			setProfit(1);
+//			setProfit(1);
+			setPriceOut(price);
 		}
 		public void setProfit(double profit) {
 			if(profit<=1.5 && profit>=1) {
@@ -17,7 +18,8 @@ public class Accessory extends Instrument{
 			}
 		}
 		public void setPriceOut(double priceOut) {
-			this.priceOut=this.price+this.price*profit;
+//			System.out.print(priceOut);
+			this.priceOut=priceOut+priceOut*profit;
 		}
 		
 		public static void editProduct(Accessory accessory, int idEdit) {

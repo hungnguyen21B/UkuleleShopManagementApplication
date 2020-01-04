@@ -78,11 +78,15 @@ public class Employee implements IEmployee {
 		int idChoose = input.nextInt();
 		System.out.println("Product: ");
 		Instrument.displayOneProduct(idChoose);
+		
 	};
 	public void addProduct() {
+		try {
+		int idChoose;
+		do {
 		System.out.println("Enter the type(1=ukulele)(2=accesory): ");
-		int idChoose = input.nextInt();
-		
+		idChoose = input.nextInt();
+		}while(idChoose<1 && idChoose>2);
 		System.out.println("Enter the name: ");
 		String name = input.next();
 		System.out.println("Enter the color: ");
@@ -95,8 +99,11 @@ public class Employee implements IEmployee {
 		Ukulele.addProduct(new Ukulele(name,price,color,quantity));	
 		}else {
 		Accessory.addProduct(new Accessory(name,price,color,quantity));	
+		}}
+		catch(Exception e) {
+			addProduct();
 		}
-	};
+	}
 	public void deleteProduct() {
 		System.out.println("Enter the code you want to delete: ");
 		int idChoose = input.nextInt();
@@ -113,6 +120,21 @@ public class Employee implements IEmployee {
 	public static void displayAllEmployee() {
 		for (int i=0; i<employeeList.size();i++) {
 			System.out.println(employeeList.get(i));
+		}
+	}
+	public static int getIndexOneEmployee(int id) {
+		for (int i=0; i<employeeList.size();i++) {
+			if(employeeList.get(i).getId()==id) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	public static void displayOneEmployee(int id) {
+		for (int i=0; i<employeeList.size();i++) {
+			if(employeeList.get(i).getId()==id) {
+				System.out.println(employeeList.get(i));
+			}
 		}
 	}
 	public String toString(){

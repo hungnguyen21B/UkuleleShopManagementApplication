@@ -16,7 +16,6 @@ public class Account {
 	private String phonenumber;
 	private boolean role=false;// flase is user //true is admin
 	private int id=countId;
-	//private int idEmployee;
 	//them tai khoan admin sau hien tai fix 3 cai
 	public Account(String username, String password, String phonenumber){
 		countId++;
@@ -69,11 +68,14 @@ public class Account {
 	public static boolean checkRegister(String username,String password1,String password2) {
 		int i;
 		for(i=0; i<listAccount.size(); i++) {
-			if ((username!=listAccount.get(i).getUsername())&&(password1==password2)) {
-				return true;
+			if ((username.equals(listAccount.get(i).getUsername()))) {
+					return false;
 			}
 		}
-		return false;
+		if(!password1.equals(password2)) {
+			return false;
+		}
+		return true;
 	}
 	public String toString() {
 		return "Username: "+getUsername()+"\nPassword: "+getPassword();

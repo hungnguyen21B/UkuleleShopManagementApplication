@@ -33,6 +33,7 @@ public abstract class Instrument implements IProduct {
 		this.color=color;
 		this.price=price;
 		this.quantity=quantity;
+		setPriceOut(price);
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -70,6 +71,10 @@ public abstract class Instrument implements IProduct {
 	public void setPrice(double price) {
 		this.price=price;
 	};
+	public void setPriceOut(double priceOut) {
+//		System.out.print(priceOut);
+		this.priceOut=priceOut+priceOut;
+	}
 	public double getPrice() {
 		return price;
 	}
@@ -78,7 +83,10 @@ public abstract class Instrument implements IProduct {
 		return priceOut;
 	}
 	public String toString(){
-		return "Id: "+getId()+"\nName:"+getName();
+		return "Id: "+getId()+" Name:"+getName()
+		+" \nPrice: "+getPrice()+" Old Price:"+getOldPrice()
+		+" \nProfit: "+getProfit()+" Price Out:"+getPriceOut()
+		+" \nColor: "+getColor()+" Quantity:"+getQuantity();
 	}
 	public static void deleteProduct(int id) {
 		for (int i=0; i<instrucmentList.size();i++) {
