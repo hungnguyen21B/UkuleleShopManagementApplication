@@ -3,34 +3,29 @@ package Account;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Person.Employee;
 import Product.Accessory;
 import Product.Ukulele;
 
 public class Account {
 	public static ArrayList<Account> listAccount = new ArrayList<>();
-	//private static int[] arrayAd = new int[]{1};
-	//quy dinh tai khoan admin co idemploy 1 la admin
-	private static int countId = 0;
+	private static int countId = 1;
 	private String username;
 	private String password;
-	private String phonenumber;
-	private boolean role=false;// flase is user //true is admin
+	private int idEmployee;
 	private int id=countId;
 	//them tai khoan admin sau hien tai fix 3 cai
-	public Account(String username, String password, String phonenumber){
+	public Account(String username, String password){
 		countId++;
 		this.username=username;
 		this.password=password;
-		this.phonenumber=phonenumber;
+		
 	}
-	public Account(String username, String password, String phonenumber,boolean role){
+	public Account(String username, String password,int idEmployee){
 		this.username=username;
 		this.password=password;
-		this.phonenumber=phonenumber;
-		this.role=role;
 		countId++;
 	}
-	
 	public String getUsername() {
 		return username;
 	}
@@ -40,20 +35,14 @@ public class Account {
 	public String getPassword() {
 		return password;
 	}
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber=phonenumber;
+	public void setIdEmployee(int idEmployee) {
+		this.idEmployee=idEmployee;
 	}
-	public String getPhonenumber() {
-		return phonenumber;
+	public int getIdEmployee() {
+		return idEmployee;
 	}
 	public int getId() {
 		return id;
-	}
-	public void setRole(boolean role) {
-		this.role=role;
-	}
-	public boolean isRole() {
-		return role;
 	}
 	public static int checkLogin(String username,String password) {
 		int i;
@@ -65,7 +54,7 @@ public class Account {
 		//neu -1 la khong co trong mang account
 		return -1;
 	}
-	public static boolean checkRegister(String username,String password1,String password2) {
+	public static boolean checkRegister(String username,String password1,String password2,int idEmployee) {
 		int i;
 		for(i=0; i<listAccount.size(); i++) {
 			if ((username.equals(listAccount.get(i).getUsername()))) {
@@ -74,6 +63,8 @@ public class Account {
 		}
 		if(!password1.equals(password2)) {
 			return false;
+		}else if(Employee.getIndexOneEmployee(idEmployee)==-1){
+			return false;
 		}
 		return true;
 	}
@@ -81,12 +72,10 @@ public class Account {
 		return "Username: "+getUsername()+"\nPassword: "+getPassword();
 	}
 	public static void fixAccount() {
-		listAccount.add(new Account("admin","admin","123",true));
-		listAccount.add(new Account("loan","loan","113"));
-		listAccount.add(new Account("hung","hung","123"));
-		
+		listAccount.add(new Account("admin","admin",1));
+		listAccount.add(new Account("loan","loan",2));
+		listAccount.add(new Account("hung","hung",3));	
 	}
-
 	public static void displayAllAccount() {
 		for (int i=0; i<listAccount.size();i++) {
 			System.out.println(listAccount.get(i));

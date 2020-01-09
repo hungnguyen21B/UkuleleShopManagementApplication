@@ -8,7 +8,7 @@ import Product.Ukulele;
 
 public class Employee implements IEmployee {
 	public static ArrayList<Employee> employeeList = new ArrayList<>();
-	protected static int countId = 0;
+	protected static int countId = 1;
 	protected int id=countId;
 	protected String name;
 	protected String address;
@@ -17,6 +17,9 @@ public class Employee implements IEmployee {
 	protected boolean gender;//true is male
 	protected int age;
 	Scanner input = new Scanner(System.in);
+	public Employee() {
+		
+	}
 	public Employee(String name, String address, String phonenumber, float salary, boolean gender, int age) {
 		countId++;
 		this.name=name;

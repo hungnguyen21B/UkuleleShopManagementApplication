@@ -5,6 +5,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Manager extends Employee implements IManager{
 	Scanner input = new Scanner(System.in);
+	public static boolean isManager=true;
+public Manager() {
+		
+	}
 	public Manager(String name, String address, String phonenumber, float salary, boolean gender, int age) {
 		super(name, address, phonenumber, salary, gender, age);
 	}

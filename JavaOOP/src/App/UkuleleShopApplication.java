@@ -24,13 +24,13 @@ public class UkuleleShopApplication {
 		System.out.println("\n");
 		String username= null;
 		String password = null;
-		int exit=0;
+		String exit=null;
 		int idCheckLogin=-1;
 		//neu check = -1 la khong co tai khoan
 		do {
 		System.out.println("\nEnter (113) to exit another key to countinue. ");
-		exit=input.nextInt();
-		if (exit!=113) {
+		exit=input.next();
+		if (!exit.equals("113")) {
 			System.out.println("\nEnter username: ");
 			username=input.next();
 			System.out.println("\nEnter password: ");
@@ -40,13 +40,14 @@ public class UkuleleShopApplication {
 		}	
 			idCheckLogin=Account.checkLogin(username, password);
 		}while(idCheckLogin==-1);
-		if(Account.listAccount.get(idCheckLogin).isRole()) {
-			formAdmin();
-		}else {
-			formEmployee();
+		try {
+			Manager check=(Manager) Employee.employeeList.get(Account.listAccount.get(idCheckLogin).getIdEmployee());
+			formAdmin(Account.listAccount.get(idCheckLogin).getIdEmployee());
+		}catch(Exception e){
+			formEmployee(Account.listAccount.get(idCheckLogin).getIdEmployee());
 		}
 	}
-	public void formAdmin() {
+	public void formAdmin(int id) {
 		System.out.println("****************************************");
 		System.out.println("*             MANAGER                  *");
 		System.out.println("****************************************");
@@ -60,17 +61,17 @@ public class UkuleleShopApplication {
 		switch(choose) {
 		case 2: {
 			//fix id cua manager la 0 employee la con lai
-			formEmployee();
+			formEmployee(id);
 			break;
 		}
 		case 1: {
 			//fix id cua manager la 0 employee la con lai
-			formManageEmployeeOfManager();
+			formManageEmployeeOfManager(id);
 			break;
 		}
 	}
 }
-	public void formManageEmployeeOfManager() {
+	public void formManageEmployeeOfManager(int id) {
 		System.out.println("****************************************");
 		System.out.println("*             MANNAGER                 *");
 		System.out.println("****************************************");
@@ -82,38 +83,37 @@ public class UkuleleShopApplication {
 			System.out.println("\nChoose: ");
 			choose=input.nextInt();
 		}while(choose<1 && choose>5);
-		Manager tam;
-		tam=(Manager) Employee.employeeList.get(Employee.getIndexOneEmployee(0));//dang ra la get tai 0 la idEmp tai account 
+		Manager man =(Manager) Employee.employeeList.get(Employee.getIndexOneEmployee(id));//dang ra la get tai 0 la idEmp tai account 
 		switch(choose) {
 		case 1: {
 			//fix id cua manager la 0 employee la con lai
-			tam.editEmployee();
+			man.editEmployee();
 			break;
 		}
 		case 2: {
 			//fix id cua manager la 0 employee la con lai
-			tam.deleteEmployee();
+			man.deleteEmployee();
 			break;
 		}
 		case 3: {
 			//fix id cua manager la 0 employee la con lai
-			tam.addEmployee();
+			man.addEmployee();
 			break;
 		}
 		case 4: {
 			//fix id cua manager la 0 employee la con lai
-			tam.viewOneEmployee();;
+			man.viewOneEmployee();;
 			break;
 		}
 		case 5: {
 			//fix id cua manager la 0 employee la con lai
-			tam.viewAllEmployee();
+			man.viewAllEmployee();
 			break;
 		}
 		}
 		
 	}; 
-	public void formEmployee() {
+	public void formEmployee(int id) {
 		System.out.println("****************************************");
 		System.out.println("*             EMPLOYEE                 *");
 		System.out.println("****************************************");
@@ -124,20 +124,21 @@ public class UkuleleShopApplication {
 			System.out.println("\nChoose: ");
 			choose=input.nextInt();
 		}while(choose<1 && choose>3);
+		Employee emp = Employee.employeeList.get(Employee.getIndexOneEmployee(id));
 		switch(choose) {
 		case 1: {
 			//fix id cua manager la 0 employee la con lai
-			Employee.employeeList.get(Employee.getIndexOneEmployee(2)).editProduct();//so 2 la id cua mot employee
+			emp.editProduct();//so 2 la id cua mot employee
 			break;
 		}
 		case 2: {
 			//fix id cua manager la 0 employee la con lai
-			Employee.employeeList.get(Employee.getIndexOneEmployee(2)).deleteProduct();//so 2 la id cua mot employee
+			emp.deleteProduct();//so 2 la id cua mot employee
 			break;
 		}
 		case 3: {
 			//fix id cua manager la 0 employee la con lai
-			Employee.employeeList.get(Employee.getIndexOneEmployee(2)).addProduct();//so 2 la id cua mot employee
+			emp.addProduct();//so 2 la id cua mot employee
 			break;
 		}
 		}
@@ -149,18 +150,18 @@ public class UkuleleShopApplication {
 		System.out.println("\n");
 		String username= null;
 		String password1 = null;
-		String phonenumber= null;
+		int id= 0;
 		String password2 = null;
-		int exit=0;
+		String exit=null;
 		//neu check = -1 la khong co tai khoan
 		do {
 		System.out.println("\nEnter (113) to exit another key to countinue. ");
-		exit=input.nextInt();
-		if (exit!=113) {
+		exit=input.next();
+		if (!exit.equals("113")) {
+			System.out.println("\nEnter your id employee: ");
+			id=input.nextInt();
 			System.out.println("\nEnter username: ");
 			username=input.next();
-			System.out.println("\nEnter phone number: ");
-			phonenumber=input.next();
 			System.out.println("\nEnter password: ");
 			password1=input.next();
 			System.out.println("\nConfirm: ");
@@ -169,8 +170,8 @@ public class UkuleleShopApplication {
 			pageMain();
 		}
 //		System.out.println(Account.checkRegister(username, password1,password2));
-		}while(!Account.checkRegister(username, password1,password2));
-		Account acc = new Account(username,password1,phonenumber);
+		}while(!Account.checkRegister(username, password1,password2,id));
+		Account acc = new Account(username,password1,id);
 		Account.listAccount.add(acc);
 		//add a account to list
 		System.out.println("\nSuccessful...");
@@ -209,7 +210,6 @@ public class UkuleleShopApplication {
 //		System.out.println( Instrument.instrucmentList.get(1).toString());
 		UkuleleShopApplication app = new UkuleleShopApplication();
 		app.runApp();
-
 
 	}
 
