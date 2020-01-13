@@ -1,7 +1,10 @@
 package App;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
+
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import Account.Account;
 import Person.Employee;
@@ -40,11 +43,16 @@ public class UkuleleShopApplication {
 		}	
 			idCheckLogin=Account.checkLogin(username, password);
 		}while(idCheckLogin==-1);
+		
 		try {
-			Manager check=(Manager) Employee.employeeList.get(Account.listAccount.get(idCheckLogin).getIdEmployee());
-			formAdmin(Account.listAccount.get(idCheckLogin).getIdEmployee());
+			Manager check=(Manager)Employee.employeeList.get(Employee.getIndexOneEmployee(Account.listAccount.get(Account.getIndexOneAccount(idCheckLogin)).getIdEmployee()));
+//			System.out.println("id employee: " +(Account.listAccount.get(Account.getIndexOneAccount(idCheckLogin)).getIdEmployee()));
+//			System.out.println("index employee: " +Employee.getIndexOneEmployee(Account.listAccount.get(Account.getIndexOneAccount(idCheckLogin)).getIdEmployee()));			
+			formAdmin(Account.listAccount.get(Account.getIndexOneAccount(idCheckLogin)).getIdEmployee());
 		}catch(Exception e){
-			formEmployee(Account.listAccount.get(idCheckLogin).getIdEmployee());
+//			System.out.println("id employee: " +(Account.listAccount.get(Account.getIndexOneAccount(idCheckLogin)).getIdEmployee()));
+//			System.out.println("index employee: " +Employee.getIndexOneEmployee(Account.listAccount.get(Account.getIndexOneAccount(idCheckLogin)).getIdEmployee()));
+			formEmployee(Account.listAccount.get(Account.getIndexOneAccount(idCheckLogin)).getIdEmployee());
 		}
 	}
 	public void formAdmin(int id) {
@@ -83,34 +91,39 @@ public class UkuleleShopApplication {
 			System.out.println("\nChoose: ");
 			choose=input.nextInt();
 		}while(choose<1 && choose>5);
-		Manager man =(Manager) Employee.employeeList.get(Employee.getIndexOneEmployee(id));//dang ra la get tai 0 la idEmp tai account 
-		switch(choose) {
-		case 1: {
-			//fix id cua manager la 0 employee la con lai
-			man.editEmployee();
-			break;
+		Employee emp = Employee.employeeList.get(Employee.getIndexOneEmployee(id));
+		if (emp instanceof Manager){
+			Manager man = (Manager) emp;
+		    // Do something with child
+			switch(choose) {
+			case 1: {
+				//fix id cua manager la 0 employee la con lai
+				man.editEmployee();
+				break;
+			}
+			case 2: {
+				//fix id cua manager la 0 employee la con lai
+				man.deleteEmployee();
+				break;
+			}
+			case 3: {
+				//fix id cua manager la 0 employee la con lai
+				man.addEmployee();
+				break;
+			}
+			case 4: {
+				//fix id cua manager la 0 employee la con lai
+				man.viewOneEmployee();;
+				break;
+			}
+			case 5: {
+				//fix id cua manager la 0 employee la con lai
+				man.viewAllEmployee();
+				break;
+			}
+			}
 		}
-		case 2: {
-			//fix id cua manager la 0 employee la con lai
-			man.deleteEmployee();
-			break;
-		}
-		case 3: {
-			//fix id cua manager la 0 employee la con lai
-			man.addEmployee();
-			break;
-		}
-		case 4: {
-			//fix id cua manager la 0 employee la con lai
-			man.viewOneEmployee();;
-			break;
-		}
-		case 5: {
-			//fix id cua manager la 0 employee la con lai
-			man.viewAllEmployee();
-			break;
-		}
-		}
+		
 		
 	}; 
 	public void formEmployee(int id) {
@@ -208,8 +221,14 @@ public class UkuleleShopApplication {
 	public static void main(String[] args) {
 //		fixData();
 //		System.out.println( Instrument.instrucmentList.get(1).toString());
-		UkuleleShopApplication app = new UkuleleShopApplication();
-		app.runApp();
+//		UkuleleShopApplication app = new UkuleleShopApplication();
+//		app.runApp();
+//		ArrayList<Employee> arr = new ArrayList<>();
+//		arr.add(new Manager());
+//		arr.add(new Employee());
+		Calendar temp = Calendar.getInstance();
+	    int year = temp.get(Calendar.YEAR);
+	    System.out.print(year);
 
 	}
 

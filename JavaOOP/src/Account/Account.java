@@ -24,6 +24,7 @@ public class Account {
 	public Account(String username, String password,int idEmployee){
 		this.username=username;
 		this.password=password;
+		this.idEmployee=idEmployee;
 		countId++;
 	}
 	public String getUsername() {
@@ -52,6 +53,15 @@ public class Account {
 			}
 		}
 		//neu -1 la khong co trong mang account
+		return -1;
+	}
+	public static int getIndexOneAccount(int id) {
+		int i;
+		for (i=0; i<listAccount.size(); i++) {
+			if(listAccount.get(i).getId()==id) {
+				return i;
+			}
+		}
 		return -1;
 	}
 	public static boolean checkRegister(String username,String password1,String password2,int idEmployee) {

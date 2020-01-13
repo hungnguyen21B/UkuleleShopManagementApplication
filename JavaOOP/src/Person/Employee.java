@@ -141,6 +141,8 @@ public class Employee implements IEmployee {
 		}
 	}
 	public String toString(){
-		return "Id: "+getId()+"\nName:"+getName();
-	}
+		return "Id: "+getId()+"\nName:"+getName()+"\nAddess:"+getAddress()
+		+"\nPhonenumber:"+getPhonenumber()+"\nSalary:"+getSalary()+"\nGender:"+gender
+		+"\nAge:"+getAge();
+		}
 }
