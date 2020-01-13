@@ -219,16 +219,9 @@ public class UkuleleShopApplication {
 		
 	}
 	public static void main(String[] args) {
-//		fixData();
-//		System.out.println( Instrument.instrucmentList.get(1).toString());
-//		UkuleleShopApplication app = new UkuleleShopApplication();
-//		app.runApp();
-//		ArrayList<Employee> arr = new ArrayList<>();
-//		arr.add(new Manager());
-//		arr.add(new Employee());
-		Calendar temp = Calendar.getInstance();
-	    int year = temp.get(Calendar.YEAR);
-	    System.out.print(year);
+
+		UkuleleShopApplication app = new UkuleleShopApplication();
+		app.runApp();
 
 	}
 
