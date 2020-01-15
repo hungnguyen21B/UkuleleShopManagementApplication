@@ -26,9 +26,9 @@ public Manager() {
 	}
 	public void editEmployee() {
 		try {
+		displayAllEmployee();
 		System.out.println("Enter the code you want to edit: ");
 		int idEdit = input.nextInt();
-		displayOneEmployee(idEdit);
 		System.out.println("Enter name: ");
 		String name = input.next();
 		System.out.println("Enter address: ");
@@ -57,7 +57,7 @@ public Manager() {
 			System.out.println("Fill true information.");
 			editEmployee();
 		}
-		}
+	}
 	public void addEmployee() {
 		try {
 			int newid=Employee.countId+1;

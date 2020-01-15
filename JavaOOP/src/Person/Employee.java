@@ -75,14 +75,30 @@ public class Employee implements IEmployee {
 	}
 	public void viewAllProduct() {
 		Instrument.displayAllProduct();
-	};
+	}
 	public void editProduct() {
+		Instrument.displayAllProduct();
+		int idChoose;
 		System.out.println("Enter the code you want to edit: ");
-		int idChoose = input.nextInt();
-		System.out.println("Product: ");
-		Instrument.displayOneProduct(idChoose);
-		
-	};
+		int idEdit = input.nextInt();
+		System.out.println("Enter name: ");
+		String name = input.next();
+		System.out.println("Enter price: ");
+		double price = input.nextDouble();
+		System.out.println("Enter color: ");
+		String color = input.next();
+		System.out.println("Enter the quantity: ");
+		int quantity = input.nextInt();
+		for (int i=0; i<Instrument.instrucmentList.size();i++) {
+				if (Instrument.instrucmentList.get(i).getId()==idEdit) {
+					Instrument.instrucmentList.get(i).setColor(color);
+					Instrument.instrucmentList.get(i).setName(name);
+					Instrument.instrucmentList.get(i).setPrice(price);
+					Instrument.instrucmentList.get(i).setQuantity(quantity);
+				}
+			}
+		Instrument.displayOneProduct(idEdit);
+		}
 	public void addProduct() {
 		try {
 		int idChoose;
@@ -108,9 +124,11 @@ public class Employee implements IEmployee {
 		}
 	}
 	public void deleteProduct() {
+		Instrument.displayAllProduct();
 		System.out.println("Enter the code you want to delete: ");
 		int idChoose = input.nextInt();
 		Instrument.deleteProduct(idChoose);
+		Instrument.displayAllProduct();
 	}
 	public static void fixAccount() {
 		employeeList.add(new Manager("hung","qb","123",10f,true,15));

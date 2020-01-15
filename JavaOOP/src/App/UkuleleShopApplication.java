@@ -1,11 +1,7 @@
 package App;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Scanner;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
 import Account.Account;
 import Person.Employee;
 import Person.Manager;
@@ -78,6 +74,8 @@ public class UkuleleShopApplication {
 			break;
 		}
 	}
+		logout();
+		formAdmin(id);
 }
 	public void formManageEmployeeOfManager(int id) {
 		System.out.println("****************************************");
@@ -126,35 +124,68 @@ public class UkuleleShopApplication {
 		
 		
 	}; 
+	public void logout() {
+		int choose=1;
+		try {
+			System.out.println("Do you want exit: ");
+			System.out.println("1.exit \t2.continue ");
+			choose=input.nextInt();
+		}catch(Exception e){
+			logout();
+		}
+		switch(choose) {
+		case 1: {
+			pageMain();
+			break;
+		}
+		}	
+	}
+//
+
+//
+
 	public void formEmployee(int id) {
 		System.out.println("****************************************");
 		System.out.println("*             EMPLOYEE                 *");
 		System.out.println("****************************************");
 		System.out.println("\n");
-		System.out.printf("\t1.Edit product \t2.Delete product \t3.Add product");
+		System.out.printf("\t1.Edit product \t2.Delete product \t3.Add product \t4 View one product \t5 View all product");
 		int choose;
 		do {
 			System.out.println("\nChoose: ");
 			choose=input.nextInt();
-		}while(choose<1 && choose>3);
+		}while(choose<1 && choose>5);
 		Employee emp = Employee.employeeList.get(Employee.getIndexOneEmployee(id));
 		switch(choose) {
-		case 1: {
-			//fix id cua manager la 0 employee la con lai
-			emp.editProduct();//so 2 la id cua mot employee
-			break;
+			case 1: {
+				//fix id cua manager la 0 employee la con lai
+				emp.editProduct();//so 2 la id cua mot employee
+				
+				break;
+			}
+			case 2: {
+				//fix id cua manager la 0 employee la con lai
+				emp.deleteProduct();//so 2 la id cua mot employee
+				break;
+			}
+			case 3: {
+				//fix id cua manager la 0 employee la con lai
+				emp.addProduct();//so 2 la id cua mot employee
+				break;
+			}
+			case 4: {
+				//fix id cua manager la 0 employee la con lai
+				emp.viewOneProduct();//so 2 la id cua mot employee
+				break;
+			}
+			case 5: {
+				//fix id cua manager la 0 employee la con lai
+				emp.viewAllProduct();//so 2 la id cua mot employee
+				break;
+			}
 		}
-		case 2: {
-			//fix id cua manager la 0 employee la con lai
-			emp.deleteProduct();//so 2 la id cua mot employee
-			break;
-		}
-		case 3: {
-			//fix id cua manager la 0 employee la con lai
-			emp.addProduct();//so 2 la id cua mot employee
-			break;
-		}
-		}
+		logout();
+		formEmployee(id);
 	}
 	public void registerForm() {
 		System.out.println("****************************************");
@@ -219,9 +250,14 @@ public class UkuleleShopApplication {
 		
 	}
 	public static void main(String[] args) {
-
+//		fixData();
+//		System.out.println( Instrument.instrucmentList.get(1).toString());
 		UkuleleShopApplication app = new UkuleleShopApplication();
 		app.runApp();
+//		ArrayList<Employee> arr = new ArrayList<>();
+//		arr.add(new Manager());
+//		arr.add(new Employee());
+		
 
 	}
 

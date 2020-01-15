@@ -101,7 +101,7 @@ public abstract class Instrument implements IProduct {
 		}
 	}
 	public static void displayOneProduct(int id) {
-			System.out.println(instrucmentList.get(id).getName());
+			System.out.println(instrucmentList.get(id));
 		
 	}
 	
